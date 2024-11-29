@@ -35,7 +35,7 @@ class ArticlesController extends Controller
         ]);
         // dd($validatedData);
         $art = Article::create($validatedData);
-        return redirect('/articles');
+        return redirect('/articles')->with(['success_message' => 'L\'article a été crée !']);
 
     }
 
@@ -62,7 +62,7 @@ class ArticlesController extends Controller
         // validation
 
         $article->update($request->all());
-        return redirect('/articles');
+        return redirect('/articles')->with(['success_message' => 'L\'article a été modifié !']);
 
     }
 
@@ -70,6 +70,6 @@ class ArticlesController extends Controller
     {
         // vérification des permissions plus tard
         $article->delete();
-        return redirect('/articles');
+        return redirect('/articles')->with(['success_message' => 'L\'article a été supprimée !']);
     }
 }
