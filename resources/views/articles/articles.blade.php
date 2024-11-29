@@ -1,28 +1,30 @@
 @extends('layouts.master')
 
 @section('title')
-Articles
+    Articles
 @endsection
 
 @section('content')
-<div class="flex justify-between items-center mt-6" >
-    <h2 class="text-xl m-6" >Articles</h2>
-    <a href="/articles/create">
-        <button class="p-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700">
-            New Article
-        </button>
-    </a>
-</div>
-{{--
-@if($articles)
-    @foreach($articles as $article)
+    <div class="flex justify-between items-center mt-6">
+        <h2 class="text-xl m-6">Articles</h2>
+        @auth
+            <a href="/articles/create">
+                <button class="p-3 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-700">
+                    New Article
+                </button>
+            </a>
+        @endauth
+    </div>
+    {{--
+@if ($articles)
+    @foreach ($articles as $article)
         @include('articles.index')
     @endforeach
 @else
     @include('articles.no-articles')
 @endif -->
 
-<!-- @unless(!$articles)
+<!-- @unless (!$articles)
     @foreach ($articles as $article)
         @include('articles.index')
     @endforeach
@@ -42,5 +44,14 @@ Articles
 <p>Je suis canon !</p>
 
 @endwhile --}}
-@each('partials.article', $articles, 'article', 'partials.no-articles')
+
+
+
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="grid gap-8 lg:grid-cols-4">
+            @each('partials.article', $articles, 'article', 'partials.no-articles')
+        </div>
+    </div>
+
+
 @endsection
