@@ -11,7 +11,7 @@
 <body>
     <div class="mx-auto max-w-screen-xl mt-4">
         @include('partials.header')
-
+        @include('messages.allMessages')
         <div class="m-5">
             @yield('content')
         </div>
