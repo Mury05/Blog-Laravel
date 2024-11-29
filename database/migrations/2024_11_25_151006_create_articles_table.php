@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255); 
-            $table->text('body'); 
-            $table->string('image');
-            $table->foreignId('user_id')->nullable(); 
+            $table->string('title', 255);
+            $table->text('body');
+            $table->string('image')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
         });
