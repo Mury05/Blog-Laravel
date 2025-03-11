@@ -48,13 +48,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function articles() : HasMany
+    public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
     }
 
-    public function comments () : HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+    //Ajout
+    public function isAdmin()
+    {
+        return $this->admin;
     }
 }
