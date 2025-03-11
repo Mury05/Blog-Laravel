@@ -22,24 +22,24 @@ Route::get('/about', [PagesController::class, 'about']);
 
 Route::get('/articles', [ArticlesController::class, 'index']);
 
-Route::get('/articles/create', [ArticlesController::class,'create']);
+Route::get('/articles/create', [ArticlesController::class,'create'])->middleware('admin');
 
-Route::post('/articles/create', [ArticlesController::class,'store'])->name('article.store');
+Route::post('/articles/create', [ArticlesController::class,'store'])->name('article.store')->middleware('admin');
 
 Route::get('/article/{id}', [ArticlesController::class,'show']);
 
-Route::get('article/{article}/edit', [ArticlesController::class, 'edit']);
+Route::get('article/{article}/edit', [ArticlesController::class, 'edit'])->middleware('auth');
 
-Route::put('/article/{article}/edit', [ArticlesController::class, 'update']);
+Route::put('/article/{article}/edit', [ArticlesController::class, 'update'])->middleware('auth');
 
-Route::delete('article/{article}/delete', [ArticlesController::class, 'delete']);
+Route::delete('article/{article}/delete', [ArticlesController::class, 'delete'])->middleware('auth');
 
 /**
  * Route d'authentification
  */
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'create'])->name('register-create');
-Route::get('/login', [SessionsController::class, 'index'])->name('login');
-Route::post('/login', [SessionsController::class, 'authenticate'])->name('login-auth');
-Route::post('/logout', [SessionsController::class, 'logout'])->name('logout');
-Route::get('/profile', [UserController::class, 'index'])->name('profile');
+Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
+Route::post('/register', [RegisterController::class, 'create'])->name('register-create')->middleware('guest');
+Route::get('/login', [SessionsController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [SessionsController::class, 'authenticate'])->name('login-auth')->middleware('guest');
+Route::post('/logout', [SessionsController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/profile', [UserController::class, 'index'])->name('profile')->middleware('auth');
