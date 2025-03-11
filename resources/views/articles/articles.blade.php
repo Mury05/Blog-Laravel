@@ -5,14 +5,23 @@
 @endsection
 
 @section('content')
-    <div class="flex justify-between items-center mt-6">
-        <h2 class="text-xl m-6">Articles</h2>
-        @auth
+    <div class="flex justify-between items-center mx-5 mt-6">
+        <h2 class="text-2xl font-bold m-6">Articles</h2>
+        {{-- @can('see-admin-menu')
             <a href="/articles/create">
                 <button class="p-3 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-700">
                     New Article
                 </button>
             </a>
+        @endcan --}}
+        @auth
+            @if (auth()->user()->can('create', 'App\\Models\Article'))
+                <a href="/articles/create">
+                    <button class="p-3 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-700">
+                        New Article
+                    </button>
+                </a>
+            @endif
         @endauth
     </div>
     {{--
@@ -52,6 +61,4 @@
             @each('partials.article', $articles, 'article', 'partials.no-articles')
         </div>
     </div>
-
-
 @endsection
